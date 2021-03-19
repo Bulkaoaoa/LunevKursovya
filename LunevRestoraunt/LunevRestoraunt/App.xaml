@@ -4,12 +4,12 @@
              xmlns:local="clr-namespace:LunevRestoraunt"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="MainBlue" Color="#2958E5"/>
+        <SolidColorBrush x:Key="MainBlue" Color="#39190B"/>
         <SolidColorBrush x:Key="MainBlueOpacity" Color="#4C2958E5"/>
-        <SolidColorBrush x:Key="DarkBlue" Color="#123089"/>
-        <SolidColorBrush x:Key="LightBlue" Color="#A5B5E5"/>
-        <SolidColorBrush x:Key="AlmostWhiteBlue" Color="#F5F7FF"/>
-        <FontFamily x:Key="Montserrat">/FerumDesktop;component/Resourses/Fonts/Montserrat/#Montserrat</FontFamily>
+        <SolidColorBrush x:Key="DarkBlue" Color="#FF210C03"/>
+        <SolidColorBrush x:Key="LightBlue" Color="#A69187"/>
+        <SolidColorBrush x:Key="AlmostWhiteBlue" Color="#D8D1CE"/>
+        <FontFamily x:Key="Montserrat">/LunevRestoraunt;component/Resourses/Fonts/Montserrat/#Montserrat</FontFamily>
 
         <DropShadowEffect x:Key="MainDropShadow" BlurRadius="40" Direction="315" Opacity="0.15" Color="#3928A6"/>
 

@@ -24,5 +24,10 @@ namespace LunevRestoraunt
         {
             InitializeComponent();
         }
+
+        private void MainFrame_ContentRendered(object sender, EventArgs e)
+        {
+
+        }
     }
 }
