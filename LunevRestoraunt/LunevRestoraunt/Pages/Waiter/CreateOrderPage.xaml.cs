@@ -148,6 +148,7 @@ namespace LunevRestoraunt.Pages.Waiter
                     AppData.Context.SaveChanges();
                     MessageBox.Show($"Вы успешно изменили заказ", "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                AppData.MainFrame.GoBack();
             }
             else
                 MessageBox.Show(errors, "Ошбика", MessageBoxButton.OK, MessageBoxImage.Error);

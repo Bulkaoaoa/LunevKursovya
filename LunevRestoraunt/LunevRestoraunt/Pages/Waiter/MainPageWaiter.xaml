@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
             <TextBlock VerticalAlignment="Center" Text="Поиск:"></TextBlock>
-            <TextBox Name="TxtBoxSearch" TextChanged="TxtBoxSearch_TextChanged" Width="300"></TextBox>
+            <TextBox Name="TxtBoxSearch" TextChanged="TxtBoxSearch_TextChanged" Width="200"></TextBox>
         </StackPanel>
         <ScrollViewer Margin="10 80 10 10">
             <DataGrid Name="DataGrdWaitersOrders" AutoGenerateColumns="False"  IsReadOnly="True">

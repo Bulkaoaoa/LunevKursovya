@@ -1,0 +1,24 @@
+﻿<Page x:Class="LunevRestoraunt.Pages.Waiter.PaymentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LunevRestoraunt.Pages.Waiter"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1000"
+      Title="Страница оплаты">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Left" Text="Номер карты:" TextAlignment="Right"></TextBlock>
+                <TextBox Name="TxtBoxCardNubmer" Width="300"></TextBox>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Left" Text="Владелец карты:" TextAlignment="Right"></TextBlock>
+                <TextBox Name="TxtBoxCardOwner" Width="300"></TextBox>
+            </StackPanel>
+            <Button Name="BtnConfirmPayment" Click="BtnConfirmPayment_Click" Content="Оплатить"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -40,7 +40,7 @@ namespace LunevRestoraunt.Pages.Waiter
         }
         private void BtnCreatePayment_Click(object sender, RoutedEventArgs e)
         {
-
+            AppData.MainFrame.Navigate(new Pages.Waiter.PaymentPage((sender as Button).DataContext as Order));
         }
 
         private void BtnEditOrder_Click(object sender, RoutedEventArgs e)
@@ -72,7 +72,7 @@ namespace LunevRestoraunt.Pages.Waiter
             try
             {
                 DataGrdWaitersOrders.ItemsSource = AppData.Context.Order.ToList().Where(p => p.WaiterId == AppData.CurrUser.Id
-                    && p.PaymentId != null && p.Table.Name.ToLower().Contains(TxtBoxSearch.Text.ToLower())).ToList();
+                    && p.PaymentId == null && p.Table.Name.ToLower().Contains(TxtBoxSearch.Text.ToLower())).ToList();
             }
             catch 
             {
