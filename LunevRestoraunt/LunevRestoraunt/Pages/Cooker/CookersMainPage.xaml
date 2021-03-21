@@ -1,0 +1,30 @@
+﻿<Page x:Class="LunevRestoraunt.Pages.Cooker.CookersMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LunevRestoraunt.Pages.Cooker"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Список заказов">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="DataGrdOrders" Margin="10"   SelectionChanged="DataGrdOrders_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Столик" Binding="{Binding Table.Name}" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Время заказа" Binding="{Binding DateTimeOrdered, StringFormat={}{0:dd/MM HH:mm}}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Column="1" Visibility="Hidden" Margin="10" IsReadOnly="True" AutoGenerateColumns="False" Name="DataGrdOrderDishes">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Блюдо" Binding="{Binding Dish.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Типо блюда" Binding="{Binding Dish.TypeOfDish.Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Количество" Binding="{Binding Count}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

@@ -127,7 +127,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Admin\MainPageAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AuthPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Cooker\CookersMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,8 +160,14 @@
     <Compile Include="Pages\Admin\AddDishPage.xaml.cs">
       <DependentUpon>AddDishPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Admin\MainPageAdmin.xaml.cs">
+      <DependentUpon>MainPageAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AuthPage.xaml.cs">
       <DependentUpon>AuthPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Cooker\CookersMainPage.xaml.cs">
+      <DependentUpon>CookersMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -219,8 +233,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Bartender\" />
-    <Folder Include="Pages\Cooker\" />
     <Folder Include="Resourses\Images\" />
     <Folder Include="Windows\" />
   </ItemGroup>

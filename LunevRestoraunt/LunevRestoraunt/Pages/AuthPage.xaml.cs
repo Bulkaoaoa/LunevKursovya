@@ -44,11 +44,13 @@ namespace LunevRestoraunt.Pages
                     case 1:
                         break;
                     case 2:
+                        AppData.MainFrame.Navigate(new Pages.Cooker.CookersMainPage());
                         break;
                     case 3:
                         AppData.MainFrame.Navigate(new Pages.Waiter.MainPageWaiter());
                         break;
                     case 4:
+                        AppData.MainFrame.Navigate(new Pages.Cooker.CookersMainPage());
                         break;
                 }
             }
