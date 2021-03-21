@@ -11,6 +11,11 @@
             <RowDefinition Height="100"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Frame Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
+        <Grid Background="{StaticResource LightBrown}"></Grid>
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50 0 0 0" Orientation="Horizontal">
+            <Image></Image> <!--Надо допилить ресурсы-->
+            <Button Width="200" Name="BtnBack" Click="BtnBack_Click">Назад</Button>
+        </StackPanel>
+        <Frame Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"></Frame>
     </Grid>
 </Window>

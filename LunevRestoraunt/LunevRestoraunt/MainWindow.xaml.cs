@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LunevRestoraunt.Entites;
+using LunevRestoraunt.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,11 +25,21 @@ namespace LunevRestoraunt
         public MainWindow()
         {
             InitializeComponent();
+            AppData.MainFrame = MainFrame;
         }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
+            if ((MainFrame.Content as Page) is AuthPage)
+                BtnBack.Visibility = Visibility.Collapsed;
+            else
+                BtnBack.Visibility = Visibility.Visible;
+        }
 
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppData.MainFrame.CanGoBack == true)
+                AppData.MainFrame.GoBack();
         }
     }
 }

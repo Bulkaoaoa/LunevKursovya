@@ -4,38 +4,39 @@
              xmlns:local="clr-namespace:LunevRestoraunt"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="MainBlue" Color="#39190B"/>
-        <SolidColorBrush x:Key="MainBlueOpacity" Color="#4C2958E5"/>
-        <SolidColorBrush x:Key="DarkBlue" Color="#FF210C03"/>
-        <SolidColorBrush x:Key="LightBlue" Color="#A69187"/>
-        <SolidColorBrush x:Key="AlmostWhiteBlue" Color="#D8D1CE"/>
+        <SolidColorBrush x:Key="MainBrown" Color="#39190B"/>
+        <SolidColorBrush x:Key="MainBrownOpacity" Color="#4CE5A129"/>
+        <SolidColorBrush x:Key="DarkBrown" Color="#FF210C03"/>
+        <SolidColorBrush x:Key="LightBrown" Color="#A69187"/>
+        <SolidColorBrush x:Key="AlmostWhiteBrown" Color="#D8D1CE"/>
         <FontFamily x:Key="Montserrat">/LunevRestoraunt;component/Resourses/Fonts/Montserrat/#Montserrat</FontFamily>
 
         <DropShadowEffect x:Key="MainDropShadow" BlurRadius="40" Direction="315" Opacity="0.15" Color="#3928A6"/>
 
         <Style TargetType="TextBlock" >
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}" />
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
             <Setter Property="FontWeight" Value="UltraBold"/>
+            <Setter Property="Margin" Value="5" />
         </Style>
 
         <Style TargetType="TextBlock" x:Key="StyleTbkTriggered">
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}" />
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="FontWeight" Value="UltraBold"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="{StaticResource DarkBlue}"/>
+                    <Setter Property="Foreground" Value="{StaticResource DarkBrown}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <Style TargetType="ToolTip">
             <Setter Property="Padding" Value="10 3"/>
-            <Setter Property="Background" Value="{StaticResource MainBlueOpacity}"/>
+            <Setter Property="Background" Value="{StaticResource MainBrownOpacity}"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -48,7 +49,7 @@
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource MainBlue}" />
+            <Setter Property="Background" Value="{StaticResource MainBrown}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Effect" Value="{StaticResource MainDropShadow}" />
             <Setter Property="Foreground" Value="White" />
@@ -65,7 +66,7 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Foreground" Value="Black"/>
-                    <Setter Property="Button.Background" Value="{StaticResource LightBlue}"/>
+                    <Setter Property="Button.Background" Value="{StaticResource LightBrown}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -75,17 +76,17 @@
             <Setter Property="Margin" Value="5" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
             <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="BorderBrush" Value="{StaticResource MainBlue}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MainBrown}" />
         </Style>
 
         <Style TargetType="DatePicker">
-            <Setter Property="Background" Value="{StaticResource AlmostWhiteBlue}" />
+            <Setter Property="Background" Value="{StaticResource AlmostWhiteBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="Height" Value="50" />
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}" />
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="BorderBrush" Value="{StaticResource MainBlue}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MainBrown}" />
             <Setter Property="BorderThickness" Value="0" />
             <!--<Style.Resources>
 <Style TargetType="{x:Type Button}">
@@ -100,7 +101,7 @@
         </Style>
 
         <Style TargetType="DatePickerTextBox">
-            <Setter Property="Background" Value="{StaticResource AlmostWhiteBlue}" />
+            <Setter Property="Background" Value="{StaticResource AlmostWhiteBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="BorderBrush" Value="Transparent" />
@@ -109,8 +110,8 @@
 
         <Style TargetType="TextBox">
             <Setter Property="Height" Value="50" />
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}" />
-            <Setter Property="Background" Value="{StaticResource AlmostWhiteBlue}" />
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
+            <Setter Property="Background" Value="{StaticResource AlmostWhiteBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FontSize" Value="20" />
@@ -125,11 +126,11 @@
 
         <Style TargetType="PasswordBox">
             <Setter Property="Height" Value="50" />
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}" />
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
             <Setter Property="Margin" Value="5" />
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
-            <Setter Property="Background" Value="{StaticResource AlmostWhiteBlue}" />
+            <Setter Property="Background" Value="{StaticResource AlmostWhiteBrown}" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="BorderThickness" Value="0" />
             <Style.Resources>
@@ -142,7 +143,7 @@
         <Style TargetType="RadioButton">
             <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}" />
-            <Setter Property="BorderBrush" Value="{StaticResource MainBlue}" />
+            <Setter Property="BorderBrush" Value="{StaticResource MainBrown}" />
             <Setter Property="BorderThickness" Value="2" />
         </Style>
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
@@ -162,7 +163,7 @@
                 <Trigger Property="ToggleButton.IsMouseOver" Value="true">
                     <Setter TargetName="Border" Property="Background" Value="White" />
                     <Setter TargetName="Border" Property="BorderThickness" Value="1" />
-                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MainBlue}" />
+                    <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource MainBrown}" />
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
@@ -175,7 +176,7 @@
             <Setter Property="Width" Value="180"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="{StaticResource MainBlue}"/>
+            <Setter Property="Foreground" Value="{StaticResource MainBrown}"/>
             <Setter Property="SnapsToDevicePixels" Value="True"/>
             <Setter Property="IsSynchronizedWithCurrentItem" Value="False"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
