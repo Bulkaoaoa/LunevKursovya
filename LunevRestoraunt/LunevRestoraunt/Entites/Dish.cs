@@ -17,7 +17,7 @@ namespace LunevRestoraunt.Entites
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dish()
         {
-            this.Order = new HashSet<Order>();
+            this.DishOfOrder = new HashSet<DishOfOrder>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace LunevRestoraunt.Entites
     
         public virtual TypeOfDish TypeOfDish { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<DishOfOrder> DishOfOrder { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace LunevRestoraunt.Entites
     {
         public static LunevKursovayaEntities Context = new LunevKursovayaEntities();
         public static Frame MainFrame;
+        public static User CurrUser;
     }
 }

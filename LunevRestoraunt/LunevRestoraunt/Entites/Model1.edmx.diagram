@@ -5,23 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f6d1a7b12e7d4543bf9e4a35f42eefae" Name="Diagram1">
-        <EntityTypeShape EntityType="LunevKursovayaModel.Dish" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.Order" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.Payment" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.Role" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.StatusOfPayment" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.Table" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.TypeOfDish" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LunevKursovayaModel.User" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Dish_TypeOfDish" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Order_Payment" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Order_Table" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Order_User" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Order_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_Payment_StatusOfPayment" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="LunevKursovayaModel.DishOfOrder" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.Dish" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.DishOfOrder" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.Order" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.Payment" Width="1.5" PointX="3" PointY="7.75" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.Role" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.StatusOfPayment" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.Table" Width="1.5" PointX="3" PointY="5.125" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.TypeOfDish" Width="1.5" PointX="3" PointY="11.5" />
+        <EntityTypeShape EntityType="LunevKursovayaModel.User" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_Dish_TypeOfDish" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_DishOfOrder_Dish" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_DishOfOrder_Order" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_Order_Payment" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_Order_Table" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_Order_User1" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_Payment_StatusOfPayment" />
+        <AssociationConnector Association="LunevKursovayaModel.FK_User_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

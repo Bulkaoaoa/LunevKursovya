@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LunevRestoraunt.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,36 @@ namespace LunevRestoraunt.Pages
         public AuthPage()
         {
             InitializeComponent();
+        }
+
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var errors = "";
+            var bufUser = AppData.Context.User.ToList().Where(p => p.Login.Trim() == TxtBoxLogin.Text.Trim()
+                && p.Password.Trim() == PassBoxPassword.Password.Trim()).FirstOrDefault();
+            if (string.IsNullOrWhiteSpace(TxtBoxLogin.Text)) errors += "Вы не ввели логин \r\n";
+            if (string.IsNullOrWhiteSpace(PassBoxPassword.Password)) errors += "Вы не ввели пароль \r\n";
+            if (bufUser == null) errors += "Такого пользователя не существует\r\n";
+
+            if (errors.Length == 0)
+            {
+                AppData.CurrUser = bufUser;
+
+                switch (bufUser.RoleId)
+                {
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        AppData.MainFrame.Navigate(new Pages.Waiter.MainPageWaiter());
+                        break;
+                    case 4:
+                        break;
+                }
+            }
+            else
+                MessageBox.Show(errors, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

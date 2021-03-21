@@ -1,0 +1,47 @@
+﻿<Page x:Class="LunevRestoraunt.Pages.Waiter.MainPageWaiter"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LunevRestoraunt.Pages.Waiter"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="1000"
+      Title="Главная страница | Официант" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+            <TextBlock VerticalAlignment="Center" Text="Поиск:"></TextBlock>
+            <TextBox Name="TxtBoxSearch" TextChanged="TxtBoxSearch_TextChanged" Width="300"></TextBox>
+        </StackPanel>
+        <ScrollViewer Margin="10 80 10 10">
+            <DataGrid Name="DataGrdWaitersOrders" AutoGenerateColumns="False"  IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер столика" Width="*" Binding="{Binding Table.Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Дата заказа" Width="*" Binding="{Binding DateTimeOrdered, StringFormat={}{0:dd/MM HH:mm}}"></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="BtnCreatePayment" Click="BtnCreatePayment_Click" Content="💳"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="BtnEditOrder" Click="BtnEditOrder_Click" Content="✎"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+            <Button Width="250" Content="Создать заказ" Name="BtnCreateOrder" Click="BtnCreateOrder_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Page>

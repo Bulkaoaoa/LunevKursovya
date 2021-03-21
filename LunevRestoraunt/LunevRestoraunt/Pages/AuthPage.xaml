@@ -16,9 +16,9 @@
             </StackPanel>
             <StackPanel>
                 <TextBlock HorizontalAlignment="Left" Text="Пароль:" TextAlignment="Right"></TextBlock>
-                <TextBox Name="TxtBoxPassword" Width="300"></TextBox>
+                <PasswordBox Name="PassBoxPassword" Width="300"></PasswordBox>
             </StackPanel>
-            <Button Name="BtnLogin">Войти</Button>
+            <Button Name="BtnLogin" Click="BtnLogin_Click">Войти</Button>
         </StackPanel>
     </Grid>
 </Page>

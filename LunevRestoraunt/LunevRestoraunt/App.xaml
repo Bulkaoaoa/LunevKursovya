@@ -15,7 +15,7 @@
 
         <Style TargetType="TextBlock" >
             <Setter Property="FontSize" Value="20" />
-            <Setter Property="Foreground" Value="{StaticResource MainBrown}" />
+            <Setter Property="Foreground" Value="{StaticResource LightBrown}" />
             <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
             <Setter Property="FontWeight" Value="UltraBold"/>
             <Setter Property="Margin" Value="5" />
@@ -258,7 +258,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="{StaticResource PColor_MainBlue}"/>
+                                <Setter TargetName="Border" Property="Background" Value="#D8D1CE"/>
                                 <Setter Property="Foreground" Value="White"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">

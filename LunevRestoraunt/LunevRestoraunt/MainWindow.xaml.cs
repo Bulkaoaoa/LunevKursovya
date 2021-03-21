@@ -26,6 +26,7 @@ namespace LunevRestoraunt
         {
             InitializeComponent();
             AppData.MainFrame = MainFrame;
+            AppData.MainFrame.Navigate(new Pages.AuthPage());
         }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)

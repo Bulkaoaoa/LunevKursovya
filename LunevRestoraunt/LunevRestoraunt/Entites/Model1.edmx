@@ -4,12 +4,12 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LunevKursovayaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LunevKursovayaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dish">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" Nullable="false" />
@@ -17,28 +17,28 @@
         </EntityType>
         <EntityType Name="DishOfOrder">
           <Key>
-            <PropertyRef Name="OrderId" />
             <PropertyRef Name="DishId" />
+            <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="DishId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WaiterId" Type="int" Nullable="false" />
           <Property Name="DateTimeOrdered" Type="datetime" Nullable="false" />
           <Property Name="PaymentId" Type="int" />
-          <Property Name="TableId" Type="int" />
+          <Property Name="TableId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CardNumber" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="CardOwner" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DateTimePayment" Type="datetime" Nullable="false" />
@@ -48,14 +48,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="StatusOfPayment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -72,7 +72,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="CountOfPeople" Type="int" Nullable="false" />
@@ -81,14 +81,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
@@ -145,7 +145,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Table">
-          <End Role="Table" Type="Self.Table" Multiplicity="0..1" />
+          <End Role="Table" Type="Self.Table" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Table">
@@ -153,18 +153,6 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="TableId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ClientId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -235,10 +223,6 @@
             <End Role="Table" EntitySet="Table" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <AssociationSet Name="FK_Order_User1" Association="Self.FK_Order_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Order" EntitySet="Order" />
@@ -252,72 +236,124 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LunevKursovayaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LunevKursovayaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dish" EntityType="LunevKursovayaModel.Dish" />
+          <EntitySet Name="DishOfOrder" EntityType="LunevKursovayaModel.DishOfOrder" />
+          <EntitySet Name="Order" EntityType="LunevKursovayaModel.Order" />
+          <EntitySet Name="Payment" EntityType="LunevKursovayaModel.Payment" />
+          <EntitySet Name="Role" EntityType="LunevKursovayaModel.Role" />
+          <EntitySet Name="StatusOfPayment" EntityType="LunevKursovayaModel.StatusOfPayment" />
+          <EntitySet Name="sysdiagrams" EntityType="LunevKursovayaModel.sysdiagrams" />
+          <EntitySet Name="Table" EntityType="LunevKursovayaModel.Table" />
+          <EntitySet Name="TypeOfDish" EntityType="LunevKursovayaModel.TypeOfDish" />
+          <EntitySet Name="User" EntityType="LunevKursovayaModel.User" />
+          <AssociationSet Name="FK_Dish_TypeOfDish" Association="LunevKursovayaModel.FK_Dish_TypeOfDish">
+            <End Role="TypeOfDish" EntitySet="TypeOfDish" />
+            <End Role="Dish" EntitySet="Dish" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DishOfOrder_Dish" Association="LunevKursovayaModel.FK_DishOfOrder_Dish">
+            <End Role="Dish" EntitySet="Dish" />
+            <End Role="DishOfOrder" EntitySet="DishOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DishOfOrder_Order" Association="LunevKursovayaModel.FK_DishOfOrder_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="DishOfOrder" EntitySet="DishOfOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Payment" Association="LunevKursovayaModel.FK_Order_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Table" Association="LunevKursovayaModel.FK_Order_Table">
+            <End Role="Table" EntitySet="Table" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_User1" Association="LunevKursovayaModel.FK_Order_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_StatusOfPayment" Association="LunevKursovayaModel.FK_Payment_StatusOfPayment">
+            <End Role="StatusOfPayment" EntitySet="StatusOfPayment" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="LunevKursovayaModel.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Dish">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Image" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="TypeOfDishId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TypeOfDish" Relationship="Self.FK_Dish_TypeOfDish" FromRole="Dish" ToRole="TypeOfDish" />
-          <NavigationProperty Name="Order" Relationship="Self.DishOfOrder" FromRole="Dish" ToRole="Order" />
+          <NavigationProperty Name="TypeOfDish" Relationship="LunevKursovayaModel.FK_Dish_TypeOfDish" FromRole="Dish" ToRole="TypeOfDish" />
+          <NavigationProperty Name="DishOfOrder" Relationship="LunevKursovayaModel.FK_DishOfOrder_Dish" FromRole="Dish" ToRole="DishOfOrder" />
+        </EntityType>
+        <EntityType Name="DishOfOrder">
+          <Key>
+            <PropertyRef Name="DishId" />
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="DishId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dish" Relationship="LunevKursovayaModel.FK_DishOfOrder_Dish" FromRole="DishOfOrder" ToRole="Dish" />
+          <NavigationProperty Name="Order" Relationship="LunevKursovayaModel.FK_DishOfOrder_Order" FromRole="DishOfOrder" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="WaiterId" Type="Int32" Nullable="false" />
           <Property Name="DateTimeOrdered" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PaymentId" Type="Int32" />
-          <Property Name="TableId" Type="Int32" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
-          <NavigationProperty Name="Table" Relationship="Self.FK_Order_Table" FromRole="Order" ToRole="Table" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Order_User1" FromRole="Order" ToRole="User" />
-          <NavigationProperty Name="Dish" Relationship="Self.DishOfOrder" FromRole="Order" ToRole="Dish" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DishOfOrder" Relationship="LunevKursovayaModel.FK_DishOfOrder_Order" FromRole="Order" ToRole="DishOfOrder" />
+          <NavigationProperty Name="Payment" Relationship="LunevKursovayaModel.FK_Order_Payment" FromRole="Order" ToRole="Payment" />
+          <NavigationProperty Name="Table" Relationship="LunevKursovayaModel.FK_Order_Table" FromRole="Order" ToRole="Table" />
+          <NavigationProperty Name="User" Relationship="LunevKursovayaModel.FK_Order_User1" FromRole="Order" ToRole="User" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CardOwner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="CardOwner" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateTimePayment" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StatusOfPaymentId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
-          <NavigationProperty Name="StatusOfPayment" Relationship="Self.FK_Payment_StatusOfPayment" FromRole="Payment" ToRole="StatusOfPayment" />
+          <NavigationProperty Name="Order" Relationship="LunevKursovayaModel.FK_Order_Payment" FromRole="Payment" ToRole="Order" />
+          <NavigationProperty Name="StatusOfPayment" Relationship="LunevKursovayaModel.FK_Payment_StatusOfPayment" FromRole="Payment" ToRole="StatusOfPayment" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="LunevKursovayaModel.FK_User_Role" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="StatusOfPayment">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_StatusOfPayment" FromRole="StatusOfPayment" ToRole="Payment" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payment" Relationship="LunevKursovayaModel.FK_Payment_StatusOfPayment" FromRole="StatusOfPayment" ToRole="Payment" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -327,38 +363,37 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CountOfPeople" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Table" FromRole="Table" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="LunevKursovayaModel.FK_Order_Table" FromRole="Table" ToRole="Order" />
         </EntityType>
         <EntityType Name="TypeOfDish">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dish" Relationship="Self.FK_Dish_TypeOfDish" FromRole="TypeOfDish" ToRole="Dish" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dish" Relationship="LunevKursovayaModel.FK_Dish_TypeOfDish" FromRole="TypeOfDish" ToRole="Dish" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Order" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Order1" Relationship="Self.FK_Order_User1" FromRole="User" ToRole="Order" />
-          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Order" Relationship="LunevKursovayaModel.FK_Order_User1" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="Role" Relationship="LunevKursovayaModel.FK_User_Role" FromRole="User" ToRole="Role" />
         </EntityType>
         <Association Name="FK_Dish_TypeOfDish">
-          <End Role="TypeOfDish" Type="Self.TypeOfDish" Multiplicity="1" />
-          <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.TypeOfDish" Role="TypeOfDish" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.Dish" Role="Dish" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeOfDish">
               <PropertyRef Name="Id" />
@@ -368,9 +403,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DishOfOrder_Dish">
+          <End Type="LunevKursovayaModel.Dish" Role="Dish" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.DishOfOrder" Role="DishOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dish">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DishOfOrder">
+              <PropertyRef Name="DishId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DishOfOrder_Order">
+          <End Type="LunevKursovayaModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.DishOfOrder" Role="DishOfOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DishOfOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Payment">
-          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="LunevKursovayaModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Payment">
               <PropertyRef Name="Id" />
@@ -381,8 +440,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Order_Table">
-          <End Role="Table" Type="Self.Table" Multiplicity="0..1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.Table" Role="Table" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Table">
               <PropertyRef Name="Id" />
@@ -392,21 +451,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Order_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Order_User1">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.User" Role="User" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -417,8 +464,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Payment_StatusOfPayment">
-          <End Role="StatusOfPayment" Type="Self.StatusOfPayment" Multiplicity="1" />
-          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.StatusOfPayment" Role="StatusOfPayment" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.Payment" Role="Payment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StatusOfPayment">
               <PropertyRef Name="Id" />
@@ -429,8 +476,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Role">
-          <End Role="Role" Type="Self.Role" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <End Type="LunevKursovayaModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="LunevKursovayaModel.User" Role="User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="Id" />
@@ -440,54 +487,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DishOfOrder">
-          <End Role="Dish" Type="Self.Dish" Multiplicity="*" />
-          <End Role="Order" Type="Self.Order" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="LunevKursovayaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Dish" EntityType="Self.Dish" />
-          <EntitySet Name="Order" EntityType="Self.Order" />
-          <EntitySet Name="Payment" EntityType="Self.Payment" />
-          <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="StatusOfPayment" EntityType="Self.StatusOfPayment" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Table" EntityType="Self.Table" />
-          <EntitySet Name="TypeOfDish" EntityType="Self.TypeOfDish" />
-          <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_Dish_TypeOfDish" Association="Self.FK_Dish_TypeOfDish">
-            <End Role="TypeOfDish" EntitySet="TypeOfDish" />
-            <End Role="Dish" EntitySet="Dish" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Payment" Association="Self.FK_Order_Payment">
-            <End Role="Payment" EntitySet="Payment" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_Table" Association="Self.FK_Order_Table">
-            <End Role="Table" EntitySet="Table" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User" Association="Self.FK_Order_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Order_User1" Association="Self.FK_Order_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Payment_StatusOfPayment" Association="Self.FK_Payment_StatusOfPayment">
-            <End Role="StatusOfPayment" EntitySet="StatusOfPayment" />
-            <End Role="Payment" EntitySet="Payment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="DishOfOrder" Association="Self.DishOfOrder">
-            <End Role="Dish" EntitySet="Dish" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -496,103 +496,103 @@
           <EntitySetMapping Name="Dish">
             <EntityTypeMapping TypeName="LunevKursovayaModel.Dish">
               <MappingFragment StoreEntitySet="Dish">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="TypeOfDishId" ColumnName="TypeOfDishId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DishOfOrder">
+            <EntityTypeMapping TypeName="LunevKursovayaModel.DishOfOrder">
+              <MappingFragment StoreEntitySet="DishOfOrder">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="DishId" ColumnName="DishId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="LunevKursovayaModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="WaiterId" ColumnName="WaiterId" />
-                <ScalarProperty Name="DateTimeOrdered" ColumnName="DateTimeOrdered" />
-                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
                 <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="DateTimeOrdered" ColumnName="DateTimeOrdered" />
+                <ScalarProperty Name="WaiterId" ColumnName="WaiterId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Payment">
             <EntityTypeMapping TypeName="LunevKursovayaModel.Payment">
               <MappingFragment StoreEntitySet="Payment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardOwner" ColumnName="CardOwner" />
-                <ScalarProperty Name="DateTimePayment" ColumnName="DateTimePayment" />
                 <ScalarProperty Name="StatusOfPaymentId" ColumnName="StatusOfPaymentId" />
+                <ScalarProperty Name="DateTimePayment" ColumnName="DateTimePayment" />
+                <ScalarProperty Name="CardOwner" ColumnName="CardOwner" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
             <EntityTypeMapping TypeName="LunevKursovayaModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StatusOfPayment">
             <EntityTypeMapping TypeName="LunevKursovayaModel.StatusOfPayment">
               <MappingFragment StoreEntitySet="StatusOfPayment">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="LunevKursovayaModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Table">
             <EntityTypeMapping TypeName="LunevKursovayaModel.Table">
               <MappingFragment StoreEntitySet="Table">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CountOfPeople" ColumnName="CountOfPeople" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeOfDish">
             <EntityTypeMapping TypeName="LunevKursovayaModel.TypeOfDish">
               <MappingFragment StoreEntitySet="TypeOfDish">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="LunevKursovayaModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DishOfOrder" TypeName="LunevKursovayaModel.DishOfOrder" StoreEntitySet="DishOfOrder">
-            <EndProperty Name="Dish">
-              <ScalarProperty Name="Id" ColumnName="DishId" />
-            </EndProperty>
-            <EndProperty Name="Order">
-              <ScalarProperty Name="Id" ColumnName="OrderId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

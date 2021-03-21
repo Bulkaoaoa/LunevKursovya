@@ -17,21 +17,19 @@ namespace LunevRestoraunt.Entites
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.Dish = new HashSet<Dish>();
+            this.DishOfOrder = new HashSet<DishOfOrder>();
         }
     
         public int Id { get; set; }
-        public int ClientId { get; set; }
         public int WaiterId { get; set; }
         public System.DateTime DateTimeOrdered { get; set; }
         public Nullable<int> PaymentId { get; set; }
-        public Nullable<int> TableId { get; set; }
+        public int TableId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DishOfOrder> DishOfOrder { get; set; }
         public virtual Payment Payment { get; set; }
         public virtual Table Table { get; set; }
         public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dish> Dish { get; set; }
     }
 }

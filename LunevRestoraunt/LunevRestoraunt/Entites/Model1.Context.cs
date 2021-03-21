@@ -26,6 +26,7 @@ namespace LunevRestoraunt.Entites
         }
     
         public virtual DbSet<Dish> Dish { get; set; }
+        public virtual DbSet<DishOfOrder> DishOfOrder { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Role> Role { get; set; }
